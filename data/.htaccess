@@ -1,0 +1,11 @@
+# Prevents script execution and direct access to files in the data folder
+
+# Removes the possibility of treating these files as code
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .phps
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .phps
+
+# Prevents direct browser access to ANY files in the folder
+<FilesMatch ".*">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
