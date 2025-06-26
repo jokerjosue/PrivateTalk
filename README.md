@@ -27,6 +27,37 @@ This is the main, always-on, production version.
 - **Local dashboard:** Easily track and manually destroy your own messages by uploading your log file (no server-side tracking).
 
 
+## Comparison with Similar Services
+
+| Feature                           | **PrivateTalk** | PrivNote | OneTimeSecret | SafeNote | Privmsg |
+|------------------------------------|:--------------:|:--------:|:-------------:|:--------:|:-------:|
+| **End-to-end encryption in browser** | ✅           | ❌       | ❌            | ✅       | ❌      |
+| **Open-source code**               | ✅             | ❌       | ✅            | ❌       | ✅      |
+| **No database (flat files only)**  | ✅             | ❌       | ❌            | ❌       | ❌      |
+| **Public destruction/expired logs**| ✅             | ❌       | ❌            | ❌       | ❌      |
+| **Dashboard for private management** | ✅           | ❌       | ❌            | ❌       | ❌      |
+| **No cookies, no tracking**        | ✅             | ❌       | ❌            | ✅       | ❌      |
+| **Password/keyword protection**    | ✅             | ❌       | ✅            | ❌       | ✅      |
+| **Time-lock (windowed access)**    | ✅             | ❌       | ❌            | ❌       | ❌      |
+| **Message expiration (time-based)**| ✅             | ✅       | ✅            | ✅       | ✅      |
+| **No ads, no monetization**        | ✅             | ❌       | ❌            | ❌       | ✅      |
+| **Minimalist, responsive UI**      | ✅             | ✅       | ❌            | ✅       | ✅      |
+| **Account registration required**  | ❌             | ❌       | ❌            | ✅       | ✅      |
+| **Email/SMS notifications**        | ❌             | ❌       | ✅            | ✅       | ✅      |
+
+> ✅ — Feature available  
+> ❌ — Not available  
+
+**Notes:**
+- **PrivateTalk** is radically privacy-focused: there is no account system, and no emails, phone numbers, or notifications are ever collected or sent.
+- **No registration** means no user data to leak, hack, or misuse—maximum anonymity for all users.
+- **No notifications** (email/SMS) because the platform never stores any contact information; all control remains with the sender and recipient.
+- Only PrivateTalk encrypts *everything* on the client side, never storing readable content on the server.
+- Public logs allow anyone to independently verify when a message was destroyed or expired.
+
+*This table is periodically reviewed; let us know if you spot an inaccuracy or want a service added!*
+
+
 ## How It Works
 
 1. **Write your message.**
@@ -82,5 +113,6 @@ Some aspects of the codebase benefited from code review and productivity tools, 
 ---
 
 Questions, suggestions, or feedback?  
-Open an issue or see [Bitcointalk Topic].
+Open an issue or see [Bitcointalk Topic](https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925).
+If you liked the project and want to support (or buy me a beer), I accept donations in BTC: bc1q9f2dhfdrzruyecfwea3n6nt2nuaj6htzgke5q2
 
