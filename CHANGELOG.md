@@ -65,3 +65,15 @@
 - Menor README improvements.
 - Bitcointalk topic created as a user support page.
 
+## v1.1.0 - 01-07-2025
+- Added homepage link to the dashboard title.
+- **Fixed critical bug:** Message is now destroyed **only after a valid read** (correct key), preventing deletion when accessed with an invalid or wrong key.
+- Improved server-side verification: now uses a hash of (ID + key), ensuring message destruction only if decryption is possible.
+- Minor security and file-handling improvements for message storage and expiration.
+- README.md improvements.
+**Security:**  
+- Replaced the fixed salt in passphrase-based encryption with a unique random salt per message. This significantly increases protection against rainbow table and brute-force attacks. Old messages remain compatible.
+- Added extra security headers (CSP, X-Frame-Options, X-Content-Type-Options) to strengthen browser-side protection against clickjacking and code injection.
+- Moved all inline JavaScript and CSS to external files (`main.js`, `style.css`) for full CSP compliance and stronger XSS mitigation.
+- Added `SECURITY-TESTS.md` with reports of all security testing performed.
+

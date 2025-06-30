@@ -25,6 +25,9 @@ This is the main, always-on, production version.
 - **Public logs:** Self-destruction and expiration logs are available for independent verification (SHA-256 hashes).
 - **Minimalist UI:** Responsive design for desktop and mobile, with a focus on usability.
 - **Local dashboard:** Easily track and manually destroy your own messages by uploading your log file (no server-side tracking).
+- **True One-Time Read:** Messages are only destroyed after a successful decryption with the correct key. Invalid attempts do NOT erase or reveal the message.
+- **Prevents "premature" destruction:** Unlike most similar services, messages are NOT deleted if someone tries to access them with an invalid or wrong key.
+
 
 
 ## Comparison with Similar Services
@@ -35,6 +38,7 @@ This is the main, always-on, production version.
 | **Open-source code**               | ✅             | ❌       | ✅            | ❌       | ✅      |
 | **No database (flat files only)**  | ✅             | ❌       | ❌            | ❌       | ❌      |
 | **Public destruction/expired logs**| ✅             | ❌       | ❌            | ❌       | ❌      |
+| **Safe Deletion**                  | ✅             | ❌       | ❌            | ❌       | ❌      |
 | **Dashboard for private management** | ✅           | ❌       | ❌            | ❌       | ❌      |
 | **No cookies, no tracking**        | ✅             | ❌       | ❌            | ✅       | ❌      |
 | **Password/keyword protection**    | ✅             | ❌       | ✅            | ❌       | ✅      |
@@ -54,6 +58,7 @@ This is the main, always-on, production version.
 - **No notifications** (email/SMS) because the platform never stores any contact information; all control remains with the sender and recipient.
 - Only PrivateTalk encrypts *everything* on the client side, never storing readable content on the server.
 - Public logs allow anyone to independently verify when a message was destroyed or expired.
+- **Safe Deletion:** Messages are only deleted when correctly decrypted. Wrong key attempts do not erase your message.
 
 *This table is periodically reviewed; let us know if you spot an inaccuracy or want a service added!*
 
@@ -72,6 +77,11 @@ This is the main, always-on, production version.
 - You may optionally add an extra password for enhanced security.
 - No data is tracked or shared; there are no analytics, cookies, or third-party code.
 - Self-destruction and expiration hashes are public for maximum auditability.
+- Each message uses a unique, random PBKDF2 salt and a random IV (nonce), both generated in the browser. This prevents rainbow table attacks, even if the same passphrase is reused across different messages.
+- The default encryption is AES-GCM 256-bit (can be changed to 128-bit if needed).
+- All JavaScript and CSS are served from external files only, with strict Content Security Policy (CSP), X-Frame-Options, and X-Content-Type-Options headers enforced, ensuring robust browser-side protection against code injection and clickjacking.
+
+PrivateTalk undergoes periodic security testing and code review. See [SECURITY-TESTS.md](SECURITY-TESTS.md) for a full report and historical results of manual and automated security testing.
 
 
 ## Project Status
@@ -112,7 +122,8 @@ Some aspects of the codebase benefited from code review and productivity tools, 
 
 ---
 
-Questions, suggestions, or feedback?  
+**Questions, suggestions, or feedback?**  
 Open an issue or see [Bitcointalk Topic](https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925).
+
 If you liked the project and want to support (or buy me a beer), I accept donations in BTC: bc1q9f2dhfdrzruyecfwea3n6nt2nuaj6htzgke5q2
 

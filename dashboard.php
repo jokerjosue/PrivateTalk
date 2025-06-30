@@ -1,4 +1,7 @@
 <?php
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+
 session_start();
 $DATA_DIR      = __DIR__ . '/data/';
 $DESTROYED_LOG = __DIR__ . '/destroyed.log';
@@ -46,8 +49,12 @@ function messageHash($id) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'destroy') {
     $id = preg_replace('/[^a-f0-9]/i', '', $_POST['id']);
     $file = $DATA_DIR . $id . '.txt';
+    $hashfile = $DATA_DIR . $id . '.hash';
+
     if (file_exists($file)) {
         unlink($file);
+        if (file_exists($hashfile)) unlink($hashfile);
+
         // Register as expired if not already logged
         $hash = messageHash($id);
 
@@ -64,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             file_put_contents($EXPIRED_COUNT, $total, LOCK_EX);
         }
     }
+
     // Redirect to avoid POST resubmission
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
@@ -128,7 +136,7 @@ foreach ($messages as $msg) {
 
     <!-- Header -->
     <header class="pt-header">
-        <h1>PrivateTalk - Local Dashboard</h1>
+        <h1><a href="./">PrivateTalk - Local Dashboard</a></h1>
         <span class="pt-subtitle">
             Private management of your self-destructing message links.
         </span>
@@ -139,9 +147,10 @@ foreach ($messages as $msg) {
         <div class="info-nota">
             Upload a <b>.txt</b> file with the <b>ID</b> or <b>links</b> of your messages, separated by comma and optional tag.<br>
             Example: <code>49dce4fd21f0b126,Urgent work</code> or <code>https://site.com/?id=49dce4fd21f0b126,Private backup</code>.<br>
-            <span style="color:#b6e0ff;">Nothing is sent to third parties — all processing is local in this panel.</span>
+            <span class="info-borda-azul">Nothing is sent to third parties — all processing is local in this panel.</span>
         </div>
-        <form method="post" enctype="multipart/form-data" style="margin-bottom:18px;">
+        <!-- Margin below form handled by CSS class, not inline -->
+        <form method="post" enctype="multipart/form-data" class="mb-18">
             <label class="upload-btn">
                 Select file…
                 <input type="file" name="userfile" accept=".txt,.csv" required onchange="document.getElementById('file-name').textContent = this.files[0]?.name || '' ; this.form.submit();">
@@ -149,11 +158,12 @@ foreach ($messages as $msg) {
             <span id="file-name"></span>
         </form>
         <?php if ($messages): ?>
-        <div style="margin: 16px 0 18px; font-size:1.09em;">
+        <!-- File stats row with color and margin classes -->
+        <div class="mt-16 mb-18 fs-109">
             <b>File stats:</b>
-            <span style="color:#36b37e;">Active: <?=$stats['active']?></span> &nbsp;|&nbsp;
-            <span style="color:#0082ff;">Read: <?=$stats['read']?></span> &nbsp;|&nbsp;
-            <span style="color:#e69536;">Expired: <?=$stats['expired']?></span>
+            <span class="stats-verde">Active: <?=$stats['active']?></span> &nbsp;|&nbsp;
+            <span class="stats-azul">Read: <?=$stats['read']?></span> &nbsp;|&nbsp;
+            <span class="stats-laranja">Expired: <?=$stats['expired']?></span>
         </div>
         <div class="dashboard-table-wrap">
             <table class="dashboard-table">
@@ -201,21 +211,23 @@ foreach ($messages as $msg) {
             </table>
         </div>
         <?php elseif (isset($_FILES['userfile'])): ?>
-            <div style="margin:22px 0 12px;color:#e44;">File does not contain valid IDs.</div>
+            <!-- Error message with external class, no inline CSS -->
+            <div class="erro-vermelho">File does not contain valid IDs.</div>
         <?php endif; ?>
-        <div style="font-size:0.96em;margin-top:24px;color:#888;">
+        <!-- Bottom privacy note with classes for margin and font size -->
+        <div class="fs-096 mt-24 txt-cinza">
             <b>Full privacy:</b> All processing is local on the server, never sent elsewhere.<br>
-            <span style="color:#fa5a5a;">After a refresh (F5), you need to re-upload your file for full privacy.</span>
+            <span class="stats-vermelho">After a refresh (F5), you need to re-upload your file for full privacy.</span>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="pt-footer">
         <div>
-            &copy; <?=date('Y')?> <b>PrivateTalk</b> — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
+            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.1.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
         </div>
         <div>
-            Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | Minimalist design
+            Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | <a href="https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925" target="_blank">Bitcointalk</a>
         </div>
     </footer>
 

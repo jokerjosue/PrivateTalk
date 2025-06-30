@@ -381,6 +381,14 @@ input[type=file] {
     color: #8ee6b0;
     margin: 0 0 5px 0;
 }
+.pt-header a {
+    color: #8ee6b0;
+	text-decoration-line: none;
+}
+.pt-header a:hover {
+    color: #8ee6b0;
+	text-decoration-line: underline;
+}
 .pt-subtitle {
     color: #b6e0ff;
     font-size: 1.07em;
@@ -436,4 +444,50 @@ input[type=file] {
     .pt-faq { margin-top: 18px; }
     .pt-footer { border-radius: 0 0 9px 9px; }
 }
+
+/* Layout helpers */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.align-end { align-items: flex-end; }
+.gap-10 { gap: 10px; }
+.gap-16 { gap: 16px; }
+.mb-6 { margin-bottom: 6px; }
+.mb-8 { margin-bottom: 8px; }
+
+/* Larguras específicas para selects/inputs */
+.w-44p { width: 44%; }
+.w-90  { width: 90px; }
+.w-100 { width: 100px; }
+.w-170 { width: 170px; }
+
+/* Tamanho de fonte */
+.fs-097em { font-size: 0.97em; }
+
+/* === Dashboard page custom classes === */
+/* Margins & font-sizes for dashboard-specific spacing */
+.mb-18 { margin-bottom: 18px !important; }
+.mt-16 { margin-top: 16px !important; }
+.mt-24 { margin-top: 24px !important; }
+.mb-12 { margin-bottom: 12px !important; }
+.fs-109 { font-size: 1.09em !important; }
+.fs-096 { font-size: 0.96em !important; }
+
+/* Error message style */
+.erro-vermelho {
+    color: #e44 !important;
+    margin: 22px 0 12px 0 !important;
+    font-weight: bold;
+}
+
+/* Stat colors for dashboard summary */
+.stats-verde     { color: #36b37e !important; }
+.stats-azul      { color: #0082ff !important; }
+.stats-laranja   { color: #e69536 !important; }
+.stats-vermelho  { color: #fa5a5a !important; }
+
+/* Info color highlights (optional, for .info-nota, etc) */
+.info-borda-azul    { color: #b6e0ff !important; }
+.info-borda-amarelo { color: #ffe475 !important; }
+.info-borda-verde   { color: #36b37e !important; }
+.txt-cinza          { color: #888 !important; }
 
