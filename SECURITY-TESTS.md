@@ -41,6 +41,4 @@ No reflected or stored XSS vulnerabilities detected. All flagged JS objects were
 
 ---
 
-## [Add further tests here]
-
-*(Include future penetration tests, code reviews, tool outputs, explanations, and conclusions in the same style. This file serves as a transparent security audit log for the project.)*
+*(It will include future penetration tests, code reviews, tool results, explanations, and conclusions in the same style. This archive serves as a transparent security audit trail for the project.)*

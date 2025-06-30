@@ -38,7 +38,7 @@ This is the main, always-on, production version.
 | **Open-source code**               | ✅             | ❌       | ✅            | ❌       | ✅      |
 | **No database (flat files only)**  | ✅             | ❌       | ❌            | ❌       | ❌      |
 | **Public destruction/expired logs**| ✅             | ❌       | ❌            | ❌       | ❌      |
-| **Safe Deletion**                  | ✅             | ❌       | ❌            | ❌       | ❌      |
+| **Safe Deletion**                  | ✅             | ❌       | ✅            | ✅       | ❌      |
 | **Dashboard for private management** | ✅           | ❌       | ❌            | ❌       | ❌      |
 | **No cookies, no tracking**        | ✅             | ❌       | ❌            | ✅       | ❌      |
 | **Password/keyword protection**    | ✅             | ❌       | ✅            | ❌       | ✅      |
@@ -46,7 +46,7 @@ This is the main, always-on, production version.
 | **Message expiration (time-based)**| ✅             | ✅       | ✅            | ✅       | ✅      |
 | **No ads, no monetization**        | ✅             | ❌       | ❌            | ❌       | ✅      |
 | **Minimalist, responsive UI**      | ✅             | ✅       | ❌            | ✅       | ✅      |
-| **Account registration required**  | ❌             | ❌       | ❌            | ✅       | ✅      |
+| **Account registration required**  | ❌             | ❌       | ❌            | ❌       | ✅      |
 | **Email/SMS notifications**        | ❌             | ❌       | ✅            | ✅       | ✅      |
 
 > ✅ — Feature available  
