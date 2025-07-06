@@ -416,3 +416,36 @@ document.addEventListener('DOMContentLoaded', function () {
         setInfoText('create');
     }
 });
+
+// Handles file input change (uploads and updates file name)
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle file input change: updates filename and submits the form automatically
+    var fileInput = document.getElementById('file-input');
+    var fileNameSpan = document.getElementById('file-name');
+    if (fileInput && fileNameSpan) {
+        fileInput.addEventListener('change', function() {
+            fileNameSpan.textContent = this.files[0]?.name || '';
+            // Submit the parent form when a file is selected
+            if (this.form) this.form.submit();
+        });
+    }
+
+    // Handle copy-to-clipboard buttons for links and hashes
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var val = this.getAttribute('data-copy');
+            if (val) navigator.clipboard.writeText(val);
+        });
+    });
+
+    // Confirmation dialog for "Destroy now" action
+    document.querySelectorAll('.destroy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            if (!confirm('Delete this message?')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+});
+

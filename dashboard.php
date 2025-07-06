@@ -134,6 +134,7 @@ foreach ($messages as $msg) {
     <link rel="stylesheet" href="style.css">
     <meta name="description" content="Private dashboard to manage and monitor your PrivateTalk messages. No data sent to third parties.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="main.js"></script>
 </head>
 <body>
 <div class="pt-main">
@@ -157,7 +158,7 @@ foreach ($messages as $msg) {
         <form method="post" enctype="multipart/form-data" class="mb-18">
             <label class="upload-btn">
                 Select file…
-                <input type="file" name="userfile" accept=".txt,.csv" required onchange="document.getElementById('file-name').textContent = this.files[0]?.name || '' ; this.form.submit();">
+                <input type="file" id="file-input" name="userfile" accept=".txt,.csv" required>
             </label>
             <span id="file-name"></span>
         </form>
@@ -183,7 +184,7 @@ foreach ($messages as $msg) {
                 <?php foreach ($messages as $msg):
                     $id = $msg['id'];
                     $hash = messageHash($id);
-                    $linkHtml = $msg['link'] ? '<button type="button" onclick="navigator.clipboard.writeText(\''.$msg['link'].'\')">Copy Link</button>' : '-';
+                    $linkHtml = $msg['link'] ? '<button type="button" class="copy-btn" data-copy="'.htmlspecialchars($msg['link']).'">Copy Link</button>' : '-';
                     $expiresHtml = (isset($expires_map[$id]) && time() < $expires_map[$id]) ? timestampToDate($expires_map[$id]) : '-';
                     $status = 'active';
                     if (in_array($hash, $destroyed_hashes)) $status = 'read';
@@ -193,7 +194,7 @@ foreach ($messages as $msg) {
                     <td><span title="<?=htmlspecialchars($id)?>"><?=abbreviateId($id)?></span></td>
                     <td>
                         <span><?=substr($hash,0,5).'...'.substr($hash,-5)?></span>
-                        <button type="button" onclick="navigator.clipboard.writeText('<?=$hash?>')">Copy hash</button>
+                        <button type="button" class="copy-btn" data-copy="<?=$hash?>">Copy hash</button>
                     </td>
                     <td><?=$linkHtml?></td>
                     <td><?=htmlspecialchars($msg['tag'] ?: '-')?></td>
@@ -204,7 +205,7 @@ foreach ($messages as $msg) {
                             <form method="post" style="display:inline;">
                                 <input type="hidden" name="action" value="destroy">
                                 <input type="hidden" name="id" value="<?=htmlspecialchars($id)?>">
-                                <button type="submit" onclick="return confirm('Delete this message?')">Destroy now</button>
+                                <button type="submit" class="destroy-btn">Destroy now</button>
                             </form>
                         <?php else: ?>
                             -
@@ -228,7 +229,7 @@ foreach ($messages as $msg) {
     <!-- Footer -->
     <footer class="pt-footer">
         <div>
-            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.2.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
+            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.2.1 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
         </div>
         <div>
             Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | <a href="https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925" target="_blank">Bitcointalk</a>

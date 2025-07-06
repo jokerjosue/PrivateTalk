@@ -92,3 +92,8 @@
 - Referrer information to external domains is now disabled by default, preventing metadata leaks.
 - Clipboard access is now restricted to where strictly needed, further tightening browser permissions.
 - New security audit and result in `SECURITY-TESTS.md`.
+
+## v1.2.1 – 06-07-2025
+- Fixed: File autoload failure resolved by ensuring main.js is included in the dashboard.
+- Minor improvement to test description in `SECURITY-TESTS.md`.
+

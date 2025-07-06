@@ -56,9 +56,7 @@ No reflected or stored XSS vulnerabilities detected. All flagged JS objects were
 > All major security headers present.
 > Rating: A+ (securityheaders.com)
 >
-> content-security-policy	default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:;
-referrer-policy	no-referrer
-permissions-policy	clipboard-write=(self), geolocation=(), camera=(), microphone=(), payment=()
+> content-security-policy	default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:; referrer-policy	no-referrer permissions-policy	clipboard-write=(self), geolocation=(), camera=(), microphone=(), payment=()
 > x-content-type-options	nosniff
 > x-frame-options	SAMEORIGIN
 > x-xss-protection	1; mode=block
