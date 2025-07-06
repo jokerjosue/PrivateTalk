@@ -80,6 +80,7 @@ This is the main, always-on, production version.
 - Each message uses a unique, random PBKDF2 salt and a random IV (nonce), both generated in the browser. This prevents rainbow table attacks, even if the same passphrase is reused across different messages.
 - The default encryption is AES-GCM 256-bit (can be changed to 128-bit if needed).
 - All JavaScript and CSS are served from external files only, with strict Content Security Policy (CSP), X-Frame-Options, and X-Content-Type-Options headers enforced, ensuring robust browser-side protection against code injection and clickjacking.
+- PrivateTalk enforces strong HTTP security headers (CSP, Referrer-Policy, Permissions-Policy, and more) for additional browser-side protection against XSS, clickjacking, and metadata leaks.
 
 PrivateTalk undergoes periodic security testing and code review. See [SECURITY-TESTS.md](SECURITY-TESTS.md) for a full report and historical results of manual and automated security testing.
 

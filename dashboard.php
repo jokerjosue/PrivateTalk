@@ -1,6 +1,10 @@
 <?php
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:;");
+header("Referrer-Policy: no-referrer");
+header("Permissions-Policy: clipboard-write=(self), geolocation=(), camera=(), microphone=(), payment=()");
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
+header("X-XSS-Protection: 1; mode=block");
 
 session_start();
 $DATA_DIR      = __DIR__ . '/data/';
@@ -224,7 +228,7 @@ foreach ($messages as $msg) {
     <!-- Footer -->
     <footer class="pt-footer">
         <div>
-            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.1.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
+            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.2.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
         </div>
         <div>
             Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | <a href="https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925" target="_blank">Bitcointalk</a>

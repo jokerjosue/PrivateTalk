@@ -491,3 +491,51 @@ input[type=file] {
 .info-borda-verde   { color: #36b37e !important; }
 .txt-cinza          { color: #888 !important; }
 
+/* Highlight warning for extra passphrase messages */
+.aviso-amarelo {
+    color: #ffb020 !important;
+    font-weight: bold;
+}
+
+/* Block for password retry UI */
+#pw-retry-block {
+    margin: 20px 0;
+    padding: 16px 14px 20px 14px;
+    background: #26252c;
+    border-radius: 9px;
+    box-shadow: 0 1px 4px #0002;
+    max-width: 420px;
+}
+#pw-retry-block .info.erro {
+    background: #ffcba3;
+    color: #843500;
+    font-weight: bold;
+    border-radius: 7px;
+    padding: 11px 15px;
+    margin-bottom: 13px;
+}
+#pw-retry-input {
+    background: #fff9eb;
+    color: #333;
+    border: 1px solid #ffb020;
+    border-radius: 7px;
+    padding: 10px;
+    font-size: 1.07em;
+    margin-bottom: 11px;
+}
+#pw-retry-btn {
+    background: #ffb020;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 24px;
+    border-radius: 7px;
+    border: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.18s;
+}
+#pw-retry-btn:disabled {
+    background: #d8b261;
+    cursor: not-allowed;
+}

@@ -1,6 +1,11 @@
 <?php
-header('X-Content-Type-Options: nosniff');
-header('X-Frame-Options: DENY');
+// Security Headers
+header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'; img-src 'self' data:;");
+header("Referrer-Policy: no-referrer");
+header("Permissions-Policy: clipboard-write=(self), geolocation=(), camera=(), microphone=(), payment=()");
+header("X-Content-Type-Options: nosniff");
+header("X-Frame-Options: DENY");
+header("X-XSS-Protection: 1; mode=block");
 
 $DATA_DIR = __DIR__ . '/data';
 if (!file_exists($DATA_DIR)) mkdir($DATA_DIR);
@@ -216,7 +221,7 @@ if ($_POST['action'] === 'destroy') {
     <div class="pt-cardwrap">
         <!-- Left: Message + Options -->
         <section class="pt-card pt-msgcol">
-            <div class="info pt-info">
+            <div class="info pt-info" id="info-block">
                 Write your message below. It will be <b>encrypted in your browser</b> and self-destruct after reading or expiration.
             </div>
             <div id="create-sec">
@@ -228,9 +233,12 @@ if ($_POST['action'] === 'destroy') {
                         <!-- Extra Passphrase -->
                         <div class="opt-balao">
                             <label for="extra-key"><b>Extra Passphrase (optional):</b></label>
-                            <input type="text" id="extra-key" class="styled-select" autocomplete="off" maxlength="128" placeholder="Leave blank for no extra protection">
+                            <input type="text" id="extra-key" class="styled-select" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="128" placeholder="Leave blank for no extra protection">
                             <div class="expira-nota mb-8">
-                                The message can only be read using this passphrase (in addition to the link).
+                                The message can only be read using this passphrase (in addition to the link).<br>
+								<div class="expira-nota mb-8 aviso-amarelo">
+								  Warning: If you set an extra passphrase, the message will be destroyed after opening the link, even if the passphrase is incorrect. Please make sure you have the correct passphrase before accessing.
+								</div>
                             </div>
                         </div>
                         <!-- Auto-Expiration -->
@@ -367,6 +375,15 @@ if ($_POST['action'] === 'destroy') {
                 <div class="info erro" id="error-text">Message not found, already read, expired, or not yet available.</div>
                 <button class="btn-principal" id="btn-back-error">Back</button>
             </div>
+			
+			<!-- Error password -->
+			<div id="pw-retry-block" class="hidden">
+			  <div class="info erro" id="pw-retry-msg">
+				Wrong passphrase. Please try again (attempt <span id="pw-try-count">1</span>/5).
+				<br><small>Do not refresh or close the page, or you will lose the message!</small>
+			  </div>
+			  <input type="password" id="pw-retry-input" maxlength="128" placeholder="Enter passphrase..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="verbatim"><button class="btn-principal" id="pw-retry-btn">Try Again</button>
+			</div>
 
         </section>
         <!-- Right: Stats + Dashboard Button -->
@@ -411,7 +428,7 @@ if ($_POST['action'] === 'destroy') {
     <!-- Footer -->
     <footer class="pt-footer">
         <div>
-            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.1.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
+            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.2.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
         </div>
         <div>
             Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | <a href="https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925" target="_blank">Bitcointalk</a>
