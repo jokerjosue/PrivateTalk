@@ -1,6 +1,16 @@
 # PrivateTalk
 
-PrivateTalk is a lightweight, open-source tool for sending encrypted, self-destructing messages. Focused on maximum privacy, transparency, and auditability, PrivateTalk never stores messages in plain text or requires any registration.
+PrivateTalk is a lightweight, open-source tool for sending encrypted, self-destructing messages.  
+Focused on maximum privacy, transparency, and auditability, PrivateTalk never stores messages in plain text or requires any registration.
+
+
+
+## 🚀 New in v2.0.0 — Identity (ECC)
+
+PrivateTalk now includes the **Identity (ECC)** module, allowing secure messaging using asymmetric encryption (P-256).  
+Users can generate a public key (**PTPUB1**) to share and a private key (**PTPRIV1**) to keep secret.  
+Messages sent to your public key can only be read by you — and are destroyed after being decrypted.
+
 
 
 ## Official Site
@@ -12,6 +22,7 @@ Access the live public instance here:
 This is the main, always-on, production version.
 
 > *Note: Free to use. As always, do not trust sensitive data to any service unless you have personally reviewed and audited the code!*
+
 
 
 ## Features
@@ -26,7 +37,9 @@ This is the main, always-on, production version.
 - **Minimalist UI:** Responsive design for desktop and mobile, with a focus on usability.
 - **Local dashboard:** Easily track and manually destroy your own messages by uploading your log file (no server-side tracking).
 - **True One-Time Read:** Messages are only destroyed after a successful decryption with the correct key. Invalid attempts do NOT erase or reveal the message.
-- **Prevents "premature" destruction:** Unlike most similar services, messages are NOT deleted if someone tries to access them with an invalid or wrong key.
+- **Prevents "premature" destruction:** Messages are NOT deleted if someone tries to access them with an invalid or wrong key.
+- **NEW – Identity (ECC) mode:** Send encrypted messages to a **PTPUB1** public key; only the matching **PTPRIV1** private key can decrypt them.
+- **NEW – Built-in key management:** Generate, copy, or download public/private keys directly in the browser — private keys never leave the client.
 
 
 
@@ -44,6 +57,7 @@ This is the main, always-on, production version.
 | **Password/keyword protection**    | ✅             | ❌       | ✅            | ❌       | ✅      |
 | **Time-lock (windowed access)**    | ✅             | ❌       | ❌            | ❌       | ❌      |
 | **Message expiration (time-based)**| ✅             | ✅       | ✅            | ✅       | ✅      |
+| **Identity mode (ECC)**            | ✅             | ❌       | ❌            | ❌       | ❌      |
 | **No ads, no monetization**        | ✅             | ❌       | ❌            | ❌       | ✅      |
 | **Minimalist, responsive UI**      | ✅             | ✅       | ❌            | ✅       | ✅      |
 | **Account registration required**  | ❌             | ❌       | ❌            | ❌       | ✅      |
@@ -52,37 +66,30 @@ This is the main, always-on, production version.
 > ✅ — Feature available  
 > ❌ — Not available  
 
-**Notes:**
-- **PrivateTalk** is radically privacy-focused: there is no account system, and no emails, phone numbers, or notifications are ever collected or sent.
-- **No registration** means no user data to leak, hack, or misuse—maximum anonymity for all users.
-- **No notifications** (email/SMS) because the platform never stores any contact information; all control remains with the sender and recipient.
-- Only PrivateTalk encrypts *everything* on the client side, never storing readable content on the server.
-- Public logs allow anyone to independently verify when a message was destroyed or expired.
-- **Safe Deletion:** Messages are only deleted when correctly decrypted. Wrong key attempts do not erase your message.
-
-*This table is periodically reviewed; let us know if you spot an inaccuracy or want a service added!*
 
 
 ## How It Works
 
-1. **Write your message.**
+PrivateTalk now has **two modes**:
+
+1. **Classic mode:** One-time read messages with optional extra password and expiration.
+2. **Identity (ECC) mode:** Public/private key messaging (PTPUB1/PTPRIV1) — recipient can read only with their private key.
+
+**Basic workflow:**
+1. **Write your message** (or paste recipient’s public key for Identity mode).
 2. **Share the generated link** (or split the link and key for maximum privacy).
-3. **The message can only be read once.** After it's read or the expiration time passes, the message is destroyed forever.
+3. **The message can only be read once.** After it’s read or expired, it’s gone forever.
+
 
 
 ## Security
 
-- All encryption happens in your browser, using strong algorithms (AES-GCM).
+- All encryption happens in your browser, using strong algorithms (AES-GCM for classic mode, P-256 ECIES-like for Identity mode).
 - The server never sees your plaintext message or your encryption keys.
-- You may optionally add an extra password for enhanced security.
-- No data is tracked or shared; there are no analytics, cookies, or third-party code.
-- Self-destruction and expiration hashes are public for maximum auditability.
-- Each message uses a unique, random PBKDF2 salt and a random IV (nonce), both generated in the browser. This prevents rainbow table attacks, even if the same passphrase is reused across different messages.
-- The default encryption is AES-GCM 256-bit (can be changed to 128-bit if needed).
-- All JavaScript and CSS are served from external files only, with strict Content Security Policy (CSP), X-Frame-Options, and X-Content-Type-Options headers enforced, ensuring robust browser-side protection against code injection and clickjacking.
-- PrivateTalk enforces strong HTTP security headers (CSP, Referrer-Policy, Permissions-Policy, and more) for additional browser-side protection against XSS, clickjacking, and metadata leaks.
+- No cookies, no logs, no analytics — nothing to track you.
+- Public destruction and expiration logs for independent verification.
+- Strong HTTP security headers (CSP, Referrer-Policy, Permissions-Policy, etc.) for protection against XSS, clickjacking, and data leaks.
 
-PrivateTalk undergoes periodic security testing and code review. See [SECURITY-TESTS.md](SECURITY-TESTS.md) for a full report and historical results of manual and automated security testing.
 
 
 ## Project Status
@@ -91,13 +98,13 @@ Stable, ready for use.
 Ongoing improvements and feature suggestions are welcome.
 
 
+
 ## Getting Started
 
 1. Clone or download this repository.
 2. Place the files on any PHP-enabled server (no database required).
-3. Open `index.php` in your browser and start using PrivateTalk.
+3. Open `index.php` (classic mode) or `identity.php` (Identity mode) in your browser.
 
-_For advanced setup, customization, or local hosting, see the comments in each file._
 
 
 ## Changelog
@@ -105,21 +112,18 @@ _For advanced setup, customization, or local hosting, see the comments in each f
 See [CHANGELOG.md](CHANGELOG.md) for a complete version history.
 
 
+
 ## License
 
-This project is licensed under the MIT License. See [LICENSE.txt](LICENSE.txt) for details.
+MIT License — See [LICENSE.txt](LICENSE.txt)
 
-
----
 
 
 ## Credits
 
-Developed and maintained by [joker_josue](https://bitcointalk.org/index.php?action=profile;u=97582).
+Developed and maintained by [joker_josue](https://bitcointalk.org/index.php?action=profile;u=97582).  
 
-Some aspects of the codebase benefited from code review and productivity tools, including AI assistants. All key logic and features were designed, implemented, and audited by a human developer.
-
-<sub>_Note: Some productivity and code review tools, including AI assistants, were used to support the development process._</sub>
+Some productivity and code review tools, including AI assistants, were used to support the development process — all key logic was designed and audited by a human developer.
 
 ---
 

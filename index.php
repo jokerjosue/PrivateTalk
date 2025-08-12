@@ -398,7 +398,8 @@ if ($_POST['action'] === 'destroy') {
                 <a href="expired.log" class="amarelo" target="_blank">View expiration log</a>
             </div>
             <div class="dashboard-btn-wrap">
-                <a href="dashboard.php" class="btn-dashboard">Go to Dashboard</a>
+                <a href="dashboard.php" class="btn-dashboard">Go to Dashboard</a><br>
+				<br><a href="identity.php" class="btn-dashboard">Secure Identity</a>
             </div>
         </aside>
     </div>
@@ -428,7 +429,7 @@ if ($_POST['action'] === 'destroy') {
     <!-- Footer -->
     <footer class="pt-footer">
         <div>
-            &copy; <?=date('Y')?> <b>PrivateTalk</b> v1.2.1 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
+            &copy; <?=date('Y')?> <b>PrivateTalk</b> v2.0.0 — <a href="https://github.com/jokerjosue/PrivateTalk" target="_blank">Open-Source Code</a>
         </div>
         <div>
             Created by <a href="https://bitcointalk.org/index.php?action=profile;u=97582" target="_blank">@joker_josue</a> | <a href="https://bitcointalk.org/index.php?topic=5547913.msg65520925#msg65520925" target="_blank">Bitcointalk</a>

@@ -97,3 +97,11 @@
 - Fixed: File autoload failure resolved by ensuring main.js is included in the dashboard.
 - Minor improvement to test description in `SECURITY-TESTS.md`.
 
+## v2.0.0 - 13-08-2025
+**Added:*
+- Identity (ECC) module for secure one-to-one messaging using P-256 asymmetric encryption.
+- Public (PTPUB1) and private (PTPRIV1) key pairs generated in-browser; private keys never leave the client.
+- Automatic message deletion after successful read.
+- Built-in key generation, copy, and download tools.
+- UI updated with instructions for writing and reading identity messages.
+

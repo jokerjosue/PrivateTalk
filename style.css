@@ -539,3 +539,128 @@ input[type=file] {
     background: #d8b261;
     cursor: not-allowed;
 }
+
+
+/* === Secure Identity: UI additions === */
+.identity-btn { margin-top: 10px; }
+
+.identity-pubkey {
+  background: #222b;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1em;
+  font-family: monospace;
+  margin-bottom: 10px;
+  word-break: break-all;
+}
+
+/* Segmented key display for readability */
+.key-block {
+  background: #222b;
+  padding: 10px 10px 6px 10px;
+  border-radius: 8px;
+  font-family: monospace;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 10px 0;
+}
+.key-block span {
+  display: inline-block;
+  padding: 4px 7px;
+  border-radius: 6px;
+  background: #1c2230;
+  color: #cde8ff;
+  font-size: 0.98em;
+  letter-spacing: 0.2px;
+}
+
+.key-meta { margin: 8px 0 4px 0; }
+.identity-fingerprint {
+  font-size: 1.03em;
+  color: #ffd700;
+  font-family: monospace;
+}
+
+.identity-alert {
+  background: #e44545;
+  color: #fff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 1.03em;
+}
+
+/* Advanced / danger area */
+.danger-box {
+  margin-top: 16px;
+  background: #2a1f1f;
+  border: 1px solid #4d2b2b;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.danger-note {
+  color: #ffc9c9;
+  font-size: 0.96em;
+  margin: 6px 0 10px 0;
+}
+.btn-danger {
+  background: #d24b4b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-danger:hover { background: #b93f3f; }
+.btn-secondary {
+  background: #3a4a60;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-secondary:disabled {
+  background: #2b3544;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.privkey-box {
+  width: 100%;
+  box-sizing: border-box;
+  background: #1b1f26;
+  color: #ffefef;
+  border: 1px solid #5b2c2c;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-family: monospace;
+  font-size: 0.98em;
+  padding: 10px;
+}
+
+/* Utility */
+.hidden { display: none !important; }
+.mt-24 { margin-top: 24px !important; }
+
+/* === Secure Identity: reader additions === */
+.reader-banner { margin-bottom: 12px; }
+.read-box {
+  margin-top: 16px;
+  background: #262a33;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 4px #0002;
+}
+.read-plaintext {
+  margin-top: 8px;
+  background: #1a2026;
+  border-radius: 7px;
+  padding: 10px 12px;
+  font-size: 1.05em;
+  color: #eaf7ff;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
